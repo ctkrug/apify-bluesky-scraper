@@ -1,0 +1,7 @@
+.env
+storage/
+apify_storage/
+__pycache__/
+*.pyc
+.DS_Store
+._*
