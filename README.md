@@ -30,5 +30,9 @@ step-by-step (event names that MUST match, suggested prices) in **[PUBLISH.md](P
 niche" pattern). Differentiate on reliability + the no-login author/profile modes.
 
 ## Output
-Per post: uri, text, createdAt, authorHandle/DisplayName, like/repost/replyCount, langs.
-(profile mode: did, handle, displayName, description, follower/follow/post counts.)
+Per post (rich): uri, **url** (clickable bsky.app link), cid, text, createdAt, indexedAt,
+author handle/displayName/did/avatar, like/repost/reply/**quote** counts, langs, isReply/isRepost,
+reply parent+root URIs, **hashtags**, **mentionDids**, **links**, **images** (url + alt),
+**externalLink** (link card), and **quotedPost**. Author mode can drop replies/reposts; search mode
+supports sort (top/latest), since/until dates, lang, hashtag, and from-author filters.
+(profile mode: did, handle, displayName, description, follower/follow/post counts, avatar, banner, createdAt.)

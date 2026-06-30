@@ -27,7 +27,11 @@ async def main():
         if mode == "author":
             handle = inp.get("handle") or _need("handle")
             Actor.log.info(f"author feed: {handle}")
-            rows = author_feed(handle, limit)
+            rows = author_feed(
+                handle, limit,
+                include_replies=inp.get("includeReplies", True),
+                include_reposts=inp.get("includeReposts", True),
+            )
         else:  # search
             query = inp.get("query") or _need("query")
             token = None
@@ -35,7 +39,15 @@ async def main():
             if ident and pw:
                 token = login(ident, pw)
             Actor.log.info(f"search: {query}")
-            rows = search_posts(query, limit, token=token)
+            rows = search_posts(
+                query, limit, token=token,
+                sort=inp.get("sort") or None,
+                since=inp.get("since") or None,
+                until=inp.get("until") or None,
+                lang=inp.get("lang") or None,
+                tag=inp.get("tag") or None,
+                author=inp.get("searchAuthor") or None,
+            )
 
         pushed = 0
         for r in rows:

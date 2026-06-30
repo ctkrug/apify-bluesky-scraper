@@ -16,6 +16,16 @@
     "query": { "title": "Search query", "type": "string", "description": "Keywords (search mode)", "editor": "textfield" },
     "limit": { "title": "Max records", "type": "integer", "description": "Maximum number of records to return (1–500).", "default": 25, "maximum": 500 },
     "identifier": { "title": "Bluesky handle (for search auth)", "type": "string", "description": "Your Bluesky handle (e.g. you.bsky.social). Required for search mode — used to obtain an auth token.", "editor": "textfield" },
-    "appPassword": { "title": "Bluesky app password (for search auth)", "type": "string", "editor": "textfield", "isSecret": true, "description": "Create at bsky.app → Settings → App Passwords. NOT your main password." }
+    "appPassword": { "title": "Bluesky app password (for search auth)", "type": "string", "editor": "textfield", "isSecret": true, "description": "Create at bsky.app → Settings → App Passwords. NOT your main password." },
+
+    "includeReplies": { "title": "Include replies (author mode)", "type": "boolean", "description": "Author mode: include the account's replies. Turn off for original posts only.", "default": true },
+    "includeReposts": { "title": "Include reposts (author mode)", "type": "boolean", "description": "Author mode: include posts the account reposted (each tagged isRepost).", "default": true },
+
+    "sort": { "title": "Sort (search mode)", "type": "string", "description": "Search mode: 'top' (most engaged) or 'latest' (newest first).", "editor": "select", "enum": ["top", "latest"], "enumTitles": ["Top", "Latest"] },
+    "since": { "title": "Since date (search mode)", "type": "string", "description": "Search mode: only posts on/after this date (YYYY-MM-DD or ISO timestamp).", "editor": "textfield" },
+    "until": { "title": "Until date (search mode)", "type": "string", "description": "Search mode: only posts before this date (YYYY-MM-DD or ISO timestamp).", "editor": "textfield" },
+    "lang": { "title": "Language (search mode)", "type": "string", "description": "Search mode: 2-letter language code to filter by, e.g. 'en', 'es'.", "editor": "textfield" },
+    "tag": { "title": "Hashtag (search mode)", "type": "string", "description": "Search mode: restrict to posts carrying this hashtag (no # sign).", "editor": "textfield" },
+    "searchAuthor": { "title": "From author (search mode)", "type": "string", "description": "Search mode: restrict results to posts by this handle.", "editor": "textfield" }
   }
 }
