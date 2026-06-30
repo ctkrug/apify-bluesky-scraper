@@ -22,9 +22,12 @@ pip install apify && apify run   # full actor run
 ```bash
 npm i -g apify-cli && apify login && apify push
 ```
-Set Pay-Per-Result/Event pricing in the console. **Why it can win:** weak incumbent + growing platform
-+ open protocol (the research's exact "winnable niche" pattern). Differentiate on reliability + the
-no-login author/profile modes.
+Pay-per-event billing is already **wired into the code** (`actor-start` + `result-item`). After
+`apify push`, create those two events with matching names + prices in the Console and publish — full
+step-by-step (event names that MUST match, suggested prices) in **[PUBLISH.md](PUBLISH.md)**.
+
+**Why it can win:** weak incumbent + growing platform + open protocol (the research's exact "winnable
+niche" pattern). Differentiate on reliability + the no-login author/profile modes.
 
 ## Output
 Per post: uri, text, createdAt, authorHandle/DisplayName, like/repost/replyCount, langs.

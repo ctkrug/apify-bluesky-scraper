@@ -13,9 +13,15 @@ async def main():
         mode = inp.get("mode", "author")
         limit = int(inp.get("limit", 25))
 
+        # Pay-per-event monetization. Two events (configure matching names + prices in the
+        # Apify Console → Monetization wizard): a fixed "actor-start" fee covering run overhead,
+        # then "result-item" per record returned. On non-PPE/local runs charge() is a no-op and
+        # all data is still pushed, so the actor works either way. See PUBLISH.md.
+        await Actor.charge("actor-start")
+
         if mode == "profile":
             handle = inp.get("handle") or _need("handle")
-            await Actor.push_data(get_profile(handle))
+            await Actor.push_data(get_profile(handle), "result-item")
             return
 
         if mode == "author":
@@ -31,9 +37,15 @@ async def main():
             Actor.log.info(f"search: {query}")
             rows = search_posts(query, limit, token=token)
 
+        pushed = 0
         for r in rows:
-            await Actor.push_data(r)
-        Actor.log.info(f"pushed {len(rows)} records")
+            result = await Actor.push_data(r, "result-item")
+            pushed += 1
+            # Stop once the buyer's per-run budget is spent (avoids paying for compute that earns nothing).
+            if result and result.event_charge_limit_reached:
+                Actor.log.info("pay-per-event budget reached — stopping early")
+                break
+        Actor.log.info(f"pushed {pushed} records")
 
 
 def _need(field):
