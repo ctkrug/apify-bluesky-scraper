@@ -6,6 +6,7 @@
     "mode": {
       "title": "Mode",
       "type": "string",
+      "description": "author = posts from a handle (no login); profile = account stats (no login); search = keyword search (requires app password).",
       "editor": "select",
       "enum": ["author", "profile", "search"],
       "enumTitles": ["Author feed (no login)", "Profile stats (no login)", "Search posts (needs app password)"],
@@ -13,8 +14,8 @@
     },
     "handle": { "title": "Author handle", "type": "string", "description": "e.g. bsky.app (author/profile modes)", "editor": "textfield" },
     "query": { "title": "Search query", "type": "string", "description": "Keywords (search mode)", "editor": "textfield" },
-    "limit": { "title": "Max records", "type": "integer", "default": 25, "maximum": 500 },
-    "identifier": { "title": "Bluesky handle (for search auth)", "type": "string", "editor": "textfield" },
+    "limit": { "title": "Max records", "type": "integer", "description": "Maximum number of records to return (1–500).", "default": 25, "maximum": 500 },
+    "identifier": { "title": "Bluesky handle (for search auth)", "type": "string", "description": "Your Bluesky handle (e.g. you.bsky.social). Required for search mode — used to obtain an auth token.", "editor": "textfield" },
     "appPassword": { "title": "Bluesky app password (for search auth)", "type": "string", "editor": "textfield", "isSecret": true, "description": "Create at bsky.app → Settings → App Passwords. NOT your main password." }
   }
 }
